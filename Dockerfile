@@ -18,4 +18,4 @@ COPY . /app
 
 RUN /bin/sh setup.sh
 
-ENTRYPOINT ["streamlit", "run", "Demo.py"]
+ENTRYPOINT ["streamlit", "run", "demo.py"]
