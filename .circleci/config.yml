@@ -10,16 +10,15 @@ jobs:
     steps:
       - checkout
       - run: python --version
-      # ... steps for building/testing app ...
 
       - setup_remote_docker:
           version: 20.10.14
-          docker_layer_caching: true
-
+          docker_layer_caching: true     
+           
       # build Docker image
       - run: |
-          docker build  -t $DOCKER_USER/$DOCKER_IMAGE:$TAG .
+          docker build  -t $DOCKER_USER/$DOCKER_IMAGE:$DOCKER_TAG .
       # push Docker image to docker repository    
       - run: |    
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-          docker push $DOCKER_USER/$DOCKER_IMAGE:$TAG
+          docker push $DOCKER_USER/$DOCKER_IMAGE:$DOCKER_TAG
