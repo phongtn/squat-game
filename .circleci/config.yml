@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build-and-push:
+  build:
     environment:
       DOCKER_IMAGE: squat-game
       DOCKER_TAG: latest
