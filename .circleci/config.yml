@@ -1,7 +1,10 @@
 version: 2.1
 
 jobs:
-  build:
+  build-and-push:
+    environment:
+      DOCKER_IMAGE: squat-game
+      DOCKER_TAG: latest
     docker:
       - image: cimg/python:3.10.11
     steps:
@@ -13,8 +16,10 @@ jobs:
           version: 20.10.14
           docker_layer_caching: true
 
-      # build and push Docker image
+      # build Docker image
       - run: |
-          TAG=0.1
-          docker build  -t phongtn/squat-game:latest .      
-          docker push phongtn/squat-game:latest 
+          docker build  -t $DOCKER_USER/$DOCKER_IMAGE:$TAG .
+      # push Docker image to docker repository    
+      - run: |    
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+          docker push $DOCKER_USER/$DOCKER_IMAGE:$TAG
